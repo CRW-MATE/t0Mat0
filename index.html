@@ -4,8 +4,12 @@
     margin: 0%;
     background-color: rgba(170, 170, 256);
     width: 100%;
-    height: 390%;
-    overflow-x: hidden;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
   #f {
     z-index: 1;
@@ -13,9 +17,8 @@
     background-color: rgb(46, 6, 6);
     width: 50%;
     top: 25%;
-    left: 25%;
-    max-height: 50%;
-    min-height: 50%;
+    left: 19%;
+    height: 40%;
     display: flex;
     justify-content: center;
     overflow-y: scroll;
@@ -34,19 +37,19 @@
 
   #hhh {
     /* mult donut*/
-    position: fixed;
-    z-index: 2;
+    position: absolute;
+    z-index: 4;
     width: 60%;
     bottom: -5%;
     left: 0%;
   }
   #hh {
     /* single donut*/
-    position: fixed;
-    z-index: 1;
+    position: absolute;
+    z-index: 3;
     width: 460px;
-    top: -10%;
-    right: 0%;
+    top: -20%;
+    right: -20%;
   }
   #h {
     /* sky */
@@ -62,13 +65,28 @@
     z-index: 1;
     position: absolute;
     width: 70%;
-    height: 60%;
     top: 22%;
-    left: 24%;
+    left: 18%;
     display: flex;
     justify-content: center;
   }
-
+  #ttt {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    position: absolute;
+    margin: 0%;
+    top: 0%;
+    left: 0%;
+  }
+  #tt {
+    width: 700px;
+    height: 600px;
+    background-color: rgba(75, 110, 110, 0.5);
+  }
   #aa {
     /* kitti */
     position: absolute;
@@ -79,16 +97,40 @@
   }
 </style>
 <html>
-  <img src="clouds.png" id="h" />
-  <img src="donutta.png" id="hhh" onclick="splat.play()" />
-  <img src="donut.png" id="hh" onclick="splat.play()" />
-  <img src="clouds.png" id="h" />
-  <div id="f">
-    <div id="plate"><img src="sf2.png" id="hhhh" /></div>
-  </div>
+  <title>t0Mat0</title>
 
-  <img src="tv2.png" id="a" />
+  <body>
+    <img src="clouds.png" id="h" />
+    <img src="clouds.png" id="h" />
+    <div id="ttt">
+      <div id="tt">
+        <img src="donut.png" id="hh" onclick="splat.play()" />
+        <img src="donutta.png" id="hhh" onclick="splat.play()" />
+        <div id="f">
+          <div id="plate"><img src="sf2.png" id="hhhh" /></div>
+        </div>
+
+        <img src="tv2.png" id="a" />
+      </div>
+    </div>
+  </body>
 </html>
 <script>
-  var splat = new Audio("splat.mp3");
+  const splat = new Audio("splat.mp3");
+  const pan = document.getElementById("tt");
+  const patt = document.getElementById("ttt");
+  window.onload = (event) => {
+    let xxc =
+      window.innerHeight > window.innerWidth
+        ? window.innerWidth
+        : window.innerHeight;
+    pan.style.scale = `${xxc / 750}`;
+  };
+  window.onresize = (event) => {
+    let xxc =
+      window.innerHeight > window.innerWidth
+        ? window.innerWidth
+        : window.innerHeight;
+    pan.style.scale = `${xxc / 750}`;
+  };
 </script>
