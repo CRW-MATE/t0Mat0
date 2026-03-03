@@ -54,7 +54,7 @@
   #hh {
     /* single donut*/
     position: absolute;
-    z-index: 3;
+    z-index: 1;
     width: 460px;
     top: -20%;
     right: -20%;
@@ -64,10 +64,20 @@
     position: absolute;
     width: 100%;
     height: 200px;
-    right: 0;
+    right: 0%;
     top: 0%;
 
     z-index: 2;
+  }
+  #r {
+    /* sky */
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    right: 0%;
+    top: 0%;
+    background-color: blueviolet;
+    z-index: 5;
   }
   #a {
     /*tv*/
@@ -107,6 +117,7 @@
   <title>t0Mat0</title>
 
   <body>
+    <div id="r"></div>
     <img src="clouds.png" id="h" />
     <div id="ttt">
       <div id="tt">
@@ -124,19 +135,34 @@
 <script>
   const splat = new Audio("splat.mp3");
   const pan = document.getElementById("tt");
+  const buff = document.getElementById("r");
   const patt = document.getElementById("ttt");
+
+  const buffOn = (flag) => {
+    if (flag) {
+      buff.style.visibility = "visable";
+      buff.style.zIndex = "5";
+    } else {
+      buff.style.visibility = "hidden";
+      buff.style.zIndex = "0";
+    }
+  };
   window.onload = (event) => {
+    buffOn(1);
     let xxc =
       window.innerHeight > window.innerWidth
         ? window.innerWidth
         : window.innerHeight;
     pan.style.scale = `${xxc / 750}`;
+    buffOn(0);
   };
   window.onresize = (event) => {
+    buffOn(1);
     let xxc =
       window.innerHeight > window.innerWidth
         ? window.innerWidth
         : window.innerHeight;
     pan.style.scale = `${xxc / 750}`;
+    buffOn(1);
   };
 </script>
