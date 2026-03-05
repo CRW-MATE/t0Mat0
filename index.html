@@ -2,23 +2,37 @@
 <meta name="viewport" content="user-scalable=0" />
 <style>
   html {
-    width: 100%;
-    height: 100%;
     margin: 0%;
   }
-  body {
-    margin: 0%;
-    background-color: rgba(170, 170, 256);
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+  body{
     display: flex;
-    justify-content: center;
-    align-items: center;
+      height: 100vh;
+      width:100vw;
     flex-direction: column;
-    background-image: url("hheelloo.jpg");
-    background-size: 25%;
+    background-image: url("hheelloo.webp");
+            overflow: hidden;
+    transition: ease 500ms;
+    overflow-x: hidden;
   }
+  #arr,body{
+    margin: 0%;
+  }
+  #arr{
+     height: 300vh;
+     background-color: rgba(150, 110, 186, 0.615);
+     width:100vw;
+     z-index: index 0;
+     position: absolute;
+
+  }
+  #panel{position:fixed;
+    bottom:0%;
+    background: linear-gradient(to bottom,rgb(149, 120, 255), rgb(108, 76, 224));
+    width: 100vw;
+    height:15vh;
+    display:flex;
+    justify-content:space-evenly;padding: 2vh;
+  opacity: 80%;}
   #f {
     z-index: 1;
     position: absolute;
@@ -63,14 +77,14 @@
     /* sky */
     position: absolute;
     width: 100%;
-    height: 200px;
+    height: 150px;
     right: 0%;
     top: 0%;
 
     z-index: 2;
   }
   #r {
-    /* sky */
+    /* loading */
     position: fixed;
     width: 100%;
     height: 100%;
@@ -89,28 +103,51 @@
     display: flex;
     justify-content: center;
   }
-  #ttt {
+  .ttt {
     width: 100vw;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 3;
-    position: absolute;
     margin: 0%;
-    top: 0%;
+    background-image: radial-gradient(
+      circle at center,
+      rgb(215, 29, 140) 0vh,
+      rgba(195, 53, 178, 0) 50%
+    );
+    width: 100vw;
+    height: 100vh;
   }
   #tt {
     width: 700px;
+    position: relative;
     height: 600px;
   }
-  #aa {
-    /* kitti */
-    position: absolute;
-    width: 200px;
-    left: 25%;
-    top: 5%;
-    z-index: 2;
+  .tra{
+    width: 10vw;
+    height:10vw;
+     border-radius: 10%;
+     background: linear-gradient(to top,rgb(149, 120, 255), rgb(108, 76, 224));
+  }
+  .hmm{ position: relative;
+        top:.7vw;
+        left:1.5vw;
+        width: 7vw;
+         height:7vw;
+          background:rgb(149, 120, 255)
+  }
+    .tra{
+    width: 10vw;
+    height:10vw;
+    background-color: rgb(108, 76, 224);
+     border-radius: 10%;
+  }
+  .hmm{ position: relative;
+        top:.7vw;
+        left:1.5vw;
+        width: 7vw;
+         height:7vw;
+        background-color: rgb(149, 120, 255); border-radius: 10%;
   }
 </style>
 <html>
@@ -123,7 +160,21 @@
   <body>
     <div id="r">loading...</div>
     <img src="clouds.png" id="h" />
-    <div id="ttt">
+<div id="arr">
+  <div id="panel">
+  <div class="tra" onclick="
+    ar.style.top='0vh'
+"><div class="hmm">T</div>
+  </div><div class="tra" onclick="
+
+  ar.style.top='-100vh'
+"><div class="hmm">S</div>  
+  </div><div class="tra" onclick="
+
+  ar.style.top='-200vh'
+"><div class="hmm">A</div>
+  </div></div>
+    <div class="ttt">
       <div id="tt">
         <img src="donut.png" id="hh" onclick="splat.play()" />
         <img src="donutta.png" id="hhh" onclick="splat.play()" />
@@ -134,13 +185,16 @@
         <img src="tv2.png" id="a" />
       </div>
     </div>
+    <div class="ttt">
+    </div>
   </body>
 </html>
 <script>
   const splat = new Audio("splat.mp3");
   const pan = document.getElementById("tt");
   const buff = document.getElementById("r");
-  const patt = document.getElementById("ttt");
+  const ar = document.getElementById("arr");
+  
 
   const buffOn = (flag) => {
     if (flag) {
@@ -151,22 +205,24 @@
       buff.style.zIndex = "0";
     }
   };
-  window.onload = (event) => {
-    buffOn(1);
+ const work=()=>{
+      buffOn(1);
     let xxc =
       window.innerHeight > window.innerWidth
         ? window.innerWidth
         : window.innerHeight;
-    pan.style.scale = `${xxc / 750}`;
+    pan.style.scale = `${xxc / 1000}`;
     buffOn(0);
   };
+
+  window.onload = (event) => {
+              ar.style.transition='ease 1ms'
+work();
+ar.style.transition='ease 500ms'
+  };
   window.onresize = (event) => {
-    buffOn(1);
-    let xxc =
-      window.innerHeight > window.innerWidth
-        ? window.innerWidth
-        : window.innerHeight;
-    pan.style.scale = `${xxc / 750}`;
-    buffOn(1);
+          ar.style.transition='ease 1ms'
+work();
+ar.style.transition='ease 500ms'
   };
 </script>
