@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>login</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search"
+    />
+    <style>
+      body,
+      html {
+        margin: 0%;
+        user-select: none;
+        background-color: rgb(156, 177, 195);
+      }
+      #splash {
+        width: 700px;
+        transform: rotate(90deg);
+        height: 700px;
+        background:
+          repeating-conic-gradient(rgb(11, 153, 72) 0 9%, #0000 0 11%),
+          repeating-conic-gradient(#ec0909a5 0 1%, rgb(38, 255, 0) 0 7%)
+            50% /60% 60%,
+          repeating-conic-gradient(#0000 0 1%, rgb(150, 127, 70) 0 9%) 50% / 70%
+            70%,
+          repeating-conic-gradient(#0000 0 1%, rgb(255, 0, 136) 0 13%) 50% / 80%
+            80%,
+          radial-gradient(rgb(255, 115, 0) 22%, #ca2727 0),
+          #e60f0f;
+        background-repeat: no-repeat;
+        filter: blur(20px) contrast(50);
+        border-radius: 200px;
+        box-shadow: 0 0 0 50px #fff;
+        z-index: 3;
+      }
+      .centre {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        z-index: 3;
+      }
+      #card {
+        position: absolute;
+        width: 80vw;
+        height: 80vh;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        flex-direction: column;
+        background: radial-gradient(circle, #b1c6cd 0%, #798f9a 71%);
+      }
+      .poof {
+        transition: ease 1000ms;
+      }
+      .input {
+        width: 70%;
+        height: 5%;
+        background-color: #738596;
+        color: rgb(198, 229, 245);
+        border-radius: 20px;
+      }
+      ::placeholder {
+        color: rgb(123, 165, 188);
+      }
+      *.input {
+        font-size: large;
+        text-align: center;
+      }
+      .tab {
+        height: 70px;
+        transition: ease 1200ms;
+        background: radial-gradient(circle, #7a9bb8 0%, #d3e1ee 100%);
+        color: rgb(175, 210, 238);
+        margin: 5px;
+      }
+      .tab:hover {
+        height: 80px;
+        width: 90%;
+        background: radial-gradient(circle, #7a9bb8 0%, #738596 100%);
+        color: rgb(182, 199, 214);
+      }
+      .tab.tabClick {
+        transition: ease 2000ms;
+        height: 100px;
+        width: 1000%;
+        opacity: 0%;
+      }
+      h1 {
+        color: var(--box, #006ee9);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="centre" id="dum" onclick="splashClick()">
+      <div id="splash" class="poof"></div>
+      <h1 class="centre poof">login!</h1>
+    </div>
+    <audio id="aux" loop src="assets/lwy2.mp3"></audio>
+  </body>
+  <script src="res.js"></script>
+  <script>
+    const lotuswaters = document.getElementById("aux");
+    const splash = document.getElementById("splash");
+    const dum = document.getElementById("dum");
+    let i = 1,
+      v = 1,
+      inputat;
+    let nay = setInterval(() => {
+      splash.style.background = `repeating-conic-gradient(rgb(151, 153, 72) 0 9%, #0000 0 11%),repeating-conic-gradient(#ec0909a5 0 ${i}%, rgb(38, 255, 0) 0 7%) 50% /60% 60%,repeating-conic-gradient(#0000 0 ${i}%, rgb(150, 127, 70) 0 9%) 50% / 70% 70%, repeating-conic-gradient(#0000 0 ${i}%, rgb(255, 0, 136) 0 13%) 50% / 80% 80%,radial-gradient(rgb(255, 115, 0) ${i}%, #ca2727 0),#e60f0f`;
+      i += v;
+      if (i > 99 || i == 1) {
+        v = -v;
+      }
+    }, 20);
+    function splashClick() {
+      let poof = document.querySelectorAll(".poof");
+      const child = document.createElement("div");
+      child.id = "card";
+      //
+      let input = document.createElement("input");
+      input.type = "text";
+      input.className = "input";
+      input.placeholder = user.name;
+      let login = document.createElement("h1");
+      login.textContent = "enter your username";
+      let tab = document.createElement("div");
+      tab.classList = "tab input";
+      tab.textContent = "student";
+
+      let tab1 = document.createElement("div");
+      tab1.classList = "tab input";
+      tab1.textContent = "teacher";
+
+      //
+      let login1 = document.createElement("h1");
+      login1.textContent = "pick your role";
+      //
+      child.append(login);
+      child.append(input);
+      child.append(login1);
+      child.append(tab);
+      child.append(tab1);
+      inputat = input;
+      //
+      dum.append(child);
+      for (let g = 0; g < poof.length; g++) {
+        poof[g].style.opacity = "0%";
+      }
+      document.documentElement.style.setProperty("--box", "rgb(198, 229, 245)");
+      setTimeout(() => {
+        clearInterval(nay);
+        tab.onclick = () => tabClicked(0);
+        tab1.onclick = () => tabClicked(1);
+        for (let g = 0; g < poof.length; g++) {
+          poof[g].remove();
+        }
+        lotuswaters.volume = 0.2;
+        lotuswaters.play();
+        dum.onclick = "";
+      }, 1100);
+    }
+    //
+    const tabClicked = (n) => {
+      const choice = document.querySelectorAll(".tab")[n];
+      user.role = choice.textContent;
+      user.name = inputat.value ? inputat.value : user.name;
+      choice.classList.add("tabClick");
+      setTimeout(() => {
+        console.log(user.name, user.role);
+        window.location.href = "index.html";
+      }, 700);
+    };
+  </script>
+</html>
